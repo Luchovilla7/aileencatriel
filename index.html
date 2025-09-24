@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bio de Enlaces</title>
+    <!-- Inlcuye iconos de Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <!-- Incluye el CDN de Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script><link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="min-h-screen flex items-center justify-center p-6">
+        <div class="max-w-md w-full text-center">
+            <!-- Sección de la imagen y nombre con animación -->
+            <div class="flex flex-col items-center mb-8">
+                <!-- Imagen de perfil -->
+                <div class="w-32 h-32 rounded-full overflow-hidden mb-4 opacity-0 fade-in">
+                    <img src="img/me.webp" alt="Foto de perfil" class="w-full h-full object-cover">
+                </div>
+                <!-- Nombre/título de la biografía -->
+                <h1 class="text-3xl font-thin opacity-0 fade-in-up title-font" style="animation-delay: 0.5s;">
+                    Aileen Catriel
+                </h1>
+                <p class="text-gray-600 opacity-0 fade-in-up" style="animation-delay: 0.7s;">
+                    @aileen.catriel
+                </p>
+                <!-- Iconos de redes sociales -->
+                <div class="flex space-x-4 mt-4 opacity-0 fade-in-up" style="animation-delay: 0.9s;">
+                    <a href="#" class="text-gray-400 hover:text-gray-600 transition-colors duration-300">
+                        <i class="bi bi-tiktok"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-gray-600 transition-colors duration-300">
+                        <i class="bi bi-instagram"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-gray-600 transition-colors duration-300">
+                        <i class="bi bi-threads"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Botones de enlaces -->
+            <div class="space-y-4">
+                <!-- Botón de énfasis "premium" -->
+                <a href="#" class="block w-full rounded-xl shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 opacity-0 fade-in-up overflow-hidden border border-gray-100" style="animation-delay: 1s;">
+                    <!-- Foto de portada -->
+                    <img src="https://placehold.co/600x200/4a5568/a0aec0?text=Premium" alt="Foto destacada" class="w-full h-32 object-cover">
+                    <!-- Contenido del botón -->
+                    <div class="relative bg-white text-center py-4 px-6">
+                        <span class="absolute top-0 right-0 mt-3 mr-3 bg-red-500 text-white text-xs font-bold py-1 px-2 rounded-full transform -translate-y-1/2">
+                            Premium
+                        </span>
+                        <p class="text-xl font-semibold text-gray-800">
+                            Aileen Mentoring
+                        </p>
+                        <p class="text-sm text-gray-500 mt-1">
+                            ¡Te acompañamos a crear tu Avatar IA y monetizarlo! 🤖💸
+                        </p>
+                    </div>
+                </a>
+                <a href="#" class="block w-full py-4 px-6 bg-white text-gray-800 font-semibold rounded-full shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-300 opacity-0 fade-in-up" style="animation-delay: 1.2s;">
+                    "IAfluencer" tu marca faceless en redes📲
+                </a>
+                <a href="#" class="block w-full py-4 px-6 bg-white text-gray-800 font-semibold rounded-full shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-300 opacity-0 fade-in-up" style="animation-delay: 1.4s;">
+                    Productividad + Ingresos con IA 💡💰
+                </a>
+            </div>
+
+            <!-- Copyright -->
+            <p class="mt-12 text-gray-500 text-sm opacity-0 fade-in-up" style="animation-delay: 1.6s;">
+                &copy; 2025 Aileen Catriel. Todos los derechos reservados.
+            </p>
+        </div>
+    </div>
+</body>
+</html>
