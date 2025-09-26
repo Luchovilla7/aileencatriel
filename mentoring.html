@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aileen Mentoring | Crea tu Avatar con IA</title>
+    <!-- Carga de Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        /* Definición de colores custom para el look futurista */
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'dark-bg': '#07070F', /* Fondo muy oscuro, casi negro */
+                        'dark-card': '#1A1A22', /* Fondo para tarjetas y secciones */
+                        'neon-blue': '#00FFFF', /* Cian eléctrico para acentos */
+                        'neon-purple': '#A855F7', /* Púrpura secundario para detalle */
+                        'text-light': '#E0E0E0', /* Texto claro para contraste */
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'neon': '0 0 10px rgba(0, 255, 255, 0.5), 0 0 25px rgba(0, 255, 255, 0.15)',
+                        'neon-hover': '0 0 15px rgba(0, 255, 255, 0.8), 0 0 35px rgba(0, 255, 255, 0.3)',
+                    }
+                }
+            }
+        }
+
+        /* Estilos generales para el fondo y scroll */
+        body {
+            background-color: #07070F;
+            color: #E0E0E0;
+            font-family: 'Inter', sans-serif;
+        }
+        /* Clase para el efecto de brillo de texto */
+        .text-neon-glow {
+            text-shadow: 0 0 8px #00FFFF, 0 0 15px #A855F7; /* Brillo aumentado */
+        }
+        
+        /* ------------------ Animaciones de Botón y Hover ------------------ */
+
+        /* Animación de Pulso para el CTA principal (subtle) */
+        @keyframes pulse-neon {
+            0%, 100% { box-shadow: 0 0 10px rgba(0, 255, 255, 0.7); }
+            50% { box-shadow: 0 0 20px rgba(0, 255, 255, 1); }
+        }
+
+        /* Estilo para el botón CTA con neón */
+        .btn-neon {
+            background-color: #00FFFF;
+            color: #07070F;
+            font-weight: 700;
+            /* Transición más suave y larga */
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
+            animation: pulse-neon 2s infinite ease-in-out; /* Animación de pulso */
+        }
+        .btn-neon:hover {
+            background-color: #A855F7;
+            color: #E0E0E0;
+            box-shadow: 0 0 20px #A855F7, 0 0 40px #A855F7; /* Brillo púrpura más fuerte */
+            transform: scale(1.05);
+            animation: none; /* Detener pulso en hover para enfoque */
+        }
+        
+        /* Efecto hover para las tarjetas (Beneficios, Método) */
+        .card-hover-effect {
+            transition: transform 0.4s ease-out, border-color 0.4s ease-out, box-shadow 0.4s ease-out;
+        }
+        .card-hover-effect:hover {
+            transform: translateY(-8px); /* Elevación */
+            border-color: #00FFFF; /* Borde cian intenso */
+            box-shadow: 0 15px 40px rgba(0, 255, 255, 0.3); /* Sombra intensa */
+        }
+        
+        /* Estilo para el FAQ al hacer click/hover */
+        .faq-item:hover {
+            border-color: #A855F7;
+            background-color: #1A1A22; /* Ligeramente más oscuro en hover */
+        }
+
+        /* ------------------ Animaciones de Scroll Reveal ------------------ */
+
+        /* Clase inicial: Oculta y preparada para la animación (Fade Up) */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            /* Uso de custom property para el delay, que será sobreescrito por style="transition-delay: Xms;" */
+            transition: opacity 1s cubic-bezier(0.2, 0.5, 0.1, 1), transform 1s cubic-bezier(0.2, 0.5, 0.1, 1);
+        }
+
+        /* Clase final: Estado visible */
+        .scroll-reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Navegación (simple placeholder) -->
+    <header class="bg-dark-card/50 backdrop-blur-sm fixed w-full z-10 border-b border-neon-blue/20">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="text-xl font-bold text-neon-blue text-neon-glow">AILEEN MENTORING</div>
+            <a href="#precio-final" class="hidden sm:inline-block text-sm font-semibold text-text-light hover:text-neon-blue transition duration-300">
+                Aplicar Ahora
+            </a>
+        </div>
+    </header>
+
+    <main>
+        <!-- 1. Hero Section (pantalla inicial) -->
+        <section id="hero" class="pt-24 pb-16 md:pt-32 md:pb-24 bg-dark-bg min-h-screen flex items-center">
+            <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+                
+                <!-- Contenido de Texto -->
+                <div class="lg:col-span-7 text-center lg:text-left">
+                    <!-- Se aplica scroll-reveal con delay al texto principal -->
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-4 leading-tight scroll-reveal">
+                        <span class="text-neon-blue text-neon-glow">Crea tu Avatar con IA</span> y conviértelo en tu mejor herramienta de negocio
+                    </h1>
+                    <h2 class="text-xl sm:text-2xl text-text-light/80 mb-8 max-w-xl mx-auto lg:mx-0 scroll-reveal" style="transition-delay: 200ms;">
+                        Un programa intensivo de 4 semanas para diseñar, lanzar y monetizar tu identidad digital con **Inteligencia Artificial**.
+                    </h2>
+                    <a href="#precio-final" class="inline-block btn-neon px-8 py-4 rounded-xl shadow-neon text-lg uppercase tracking-wider scroll-reveal" style="transition-delay: 400ms;">
+                        👉 Quiero empezar ahora
+                    </a>
+                </div>
+
+                <!-- Imagen/Avatar de Aileen -->
+                <div class="lg:col-span-5 flex justify-center lg:justify-end mt-10 lg:mt-0 scroll-reveal" style="transition-delay: 600ms;">
+                    <img 
+                        src="assets/img/mentoring/avatar-aileen.png" 
+                        alt="Imagen de Aileen, profesional, estilo tecnológico-futurista." 
+                        class="w-85 h-85 sm:w-95 sm:h-95 object-cover rounded-full border-4 border-neon-blue shadow-neon ring-4 ring-neon-blue/30 max-w-full h-auto"
+                        onerror="this.onerror=null;this.src='assets/img/mentoring/avatar-aileen.png';"
+                    >
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Separador / Animación (Estilo futurista) -->
+        <div class="h-1 bg-gradient-to-r from-dark-bg via-neon-blue/50 to-dark-bg opacity-75"></div>
+
+        <!-- 2. Problema + Deseo -->
+        <section id="problema" class="py-16 bg-dark-card/50 border-y border-neon-purple/20">
+            <div class="max-w-5xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+                
+                <!-- Texto (Problema y Deseo) -->
+                <div class="md:order-2 scroll-reveal" style="transition-delay: 150ms;">
+                    <p class="text-3xl font-bold mb-4 text-neon-purple">
+                        ¿Todavía no tenés un avatar de IA que trabaje por vos?
+                    </p>
+                    <p class="text-xl text-text-light/70">
+                        Mientras otros ya están generando contenido 24/7 y atrayendo clientes, vos seguís dudando en cómo dar el primer paso y **perdiendo oportunidades de monetización**.
+                    </p>
+                    <p class="mt-4 text-xl font-semibold text-neon-blue text-neon-glow">
+                        ¡Es hora de automatizar tu presencia digital!
+                    </p>
+                </div>
+                
+                <!-- Ilustración comparativa -->
+                <div class="md:order-1 flex justify-center scroll-reveal">
+                    <img 
+                        src="https://placehold.co/350x200/1C1C23/00FFFF?text=Confusión+vs+Avatar+Exitoso" 
+                        alt="Ilustración comparativa: persona confundida vs. avatar brillante funcionando." 
+                        class="w-full max-w-sm rounded-xl border border-neon-blue/50 shadow-neon"
+                    >
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Beneficios del Programa -->
+        <section id="beneficios" class="py-20 bg-dark-bg">
+            <div class="max-w-6xl mx-auto px-6">
+                <h2 class="text-4xl font-extrabold text-center mb-12 text-neon-blue text-neon-glow scroll-reveal">
+                    Beneficios Clave del Programa
+                </h2>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <!-- Lista de Beneficios con hover mejorado y staggered reveal -->
+                    <ul class="space-y-6">
+                        <li class="flex items-start bg-dark-card p-4 rounded-xl border-l-4 border-neon-blue/10 shadow-neon/10 card-hover-effect scroll-reveal" style="transition-delay: 0ms;">
+                            <span class="text-2xl text-neon-blue mr-4">✔</span>
+                            <div>
+                                <p class="text-xl font-bold">Consistencia Impecable</p>
+                                <p class="text-text-light/70">Creá un avatar profesional y consistente que representa tu marca 24/7, sin el esfuerzo de sesiones de fotos constantes.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start bg-dark-card p-4 rounded-xl border-l-4 border-neon-blue/10 shadow-neon/10 card-hover-effect scroll-reveal" style="transition-delay: 150ms;">
+                            <span class="text-2xl text-neon-blue mr-4">✔</span>
+                            <div>
+                                <p class="text-xl font-bold">Oferta Rápida y Rentable</p>
+                                <p class="text-text-light/70">Diseñá tu oferta digital y precios estratégicos en menos de 7 días, enfocándote en lo que realmente vende.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start bg-dark-card p-4 rounded-xl border-l-4 border-neon-blue/10 shadow-neon/10 card-hover-effect scroll-reveal" style="transition-delay: 300ms;">
+                            <span class="text-2xl text-neon-blue mr-4">✔</span>
+                            <div>
+                                <p class="text-xl font-bold">Lanzamiento Automatizado</p>
+                                <p class="text-text-light/70">Lanzá con un embudo simple y probado (la "Máquina 7D") que atrae tráfico cualificado desde el primer día.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start bg-dark-card p-4 rounded-xl border-l-4 border-neon-blue/10 shadow-neon/10 card-hover-effect scroll-reveal" style="transition-delay: 450ms;">
+                            <span class="text-2xl text-neon-blue mr-4">✔</span>
+                            <div>
+                                <p class="text-xl font-bold">Ventas Reales Inmediatas</p>
+                                <p class="text-text-light/70">Obtené tus primeros leads y ventas en una semana aplicando la estrategia de tráfico de alta conversión.</p>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <!-- Imagen: collage de entregables (mockups) -->
+                    <div class="flex justify-center mt-8 lg:mt-0 scroll-reveal" style="transition-delay: 600ms;">
+                        <img 
+                            src="assets/img/mentoring/mockup.png" 
+                            alt="Collage de entregables: mockup de avatar, landing page y dashboard de métricas." 
+                            class="w-full max-w-md rounded-2xl shadow-2xl max-w-full h-auto"
+                        >
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. El Método (4 Semanas Paso a Paso) -->
+        <section id="metodo" class="py-20 bg-dark-card">
+            <div class="max-w-6xl mx-auto px-6">
+                <h2 class="text-4xl font-extrabold text-center mb-16 text-neon-purple text-neon-glow scroll-reveal">
+                    El Método: 4 Semanas Paso a Paso
+                </h2>
+
+                <!-- Timeline Visual (Horizontal en Desktop, Vertical en Mobile) -->
+                <div class="relative">
+                    <!-- Línea Central -->
+                    <div class="hidden md:block absolute h-1 w-full bg-neon-blue/30 top-1/2 transform -translate-y-1/2"></div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                        
+                        <!-- Bloque Semana 1 -->
+                        <div class="bg-dark-bg p-6 rounded-xl border border-neon-blue/50 shadow-neon/10 relative card-hover-effect scroll-reveal" style="transition-delay: 0ms;">
+                            <div class="w-10 h-10 bg-neon-blue rounded-full flex items-center justify-center text-dark-bg font-bold mb-4 mx-auto md:mx-0">1</div>
+                            <h3 class="text-2xl font-bold mb-3 text-neon-blue">Semana 1 → Tu Avatar</h3>
+                            <p class="text-text-light/80">Headshot, moodboard y el prompt base perfecto. Sentamos las bases de tu identidad digital.</p>
+                        </div>
+
+                        <!-- Bloque Semana 2 -->
+                        <div class="bg-dark-bg p-6 rounded-xl border border-neon-purple/50 shadow-neon/10 relative card-hover-effect mt-8 md:mt-0 scroll-reveal" style="transition-delay: 150ms;">
+                            <div class="w-10 h-10 bg-neon-purple rounded-full flex items-center justify-center text-dark-bg font-bold mb-4 mx-auto md:mx-0">2</div>
+                            <h3 class="text-2xl font-bold mb-3 text-neon-purple">Semana 2 → Branding y Estilo</h3>
+                            <p class="text-text-light/80">Consistencia visual (lifestyle + preset), licencias y voz de marca definida.</p>
+                        </div>
+
+                        <!-- Bloque Semana 3 -->
+                        <div class="bg-dark-bg p-6 rounded-xl border border-neon-blue/50 shadow-neon/10 relative card-hover-effect mt-8 md:mt-0 scroll-reveal" style="transition-delay: 300ms;">
+                            <div class="w-10 h-10 bg-neon-blue rounded-full flex items-center justify-center text-dark-bg font-bold mb-4 mx-auto md:mx-0">3</div>
+                            <h3 class="text-2xl font-bold mb-3 text-neon-blue">Semana 3 → La Máquina 7D</h3>
+                            <p class="text-text-light/80">Diseño de oferta, embudo express (reels, carrusel, landing, tripwire) listo para funcionar.</p>
+                        </div>
+
+                        <!-- Bloque Semana 4 -->
+                        <div class="bg-dark-bg p-6 rounded-xl border border-neon-purple/50 shadow-neon/10 relative card-hover-effect mt-8 md:mt-0 scroll-reveal" style="transition-delay: 450ms;">
+                            <div class="w-10 h-10 bg-neon-purple rounded-full flex items-center justify-center text-dark-bg font-bold mb-4 mx-auto md:mx-0">4</div>
+                            <h3 class="text-2xl font-bold mb-3 text-neon-purple">Semana 4 → Lanzamiento y Data</h3>
+                            <p class="text-text-light/80">Lanzamiento con dashboard de KPIs y optimización continua para ventas reales.</p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Resultados Esperados -->
+        <section id="resultados" class="py-20 bg-dark-bg">
+            <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                
+                <!-- Resultados Listados -->
+                <div class="scroll-reveal">
+                    <h2 class="text-4xl font-extrabold mb-8 text-left text-neon-blue text-neon-glow">
+                        Al terminar tendrás...
+                    </h2>
+                    <ul class="space-y-4">
+                        <li class="flex items-center text-xl font-medium scroll-reveal" style="transition-delay: 100ms;">
+                            <span class="text-2xl text-neon-blue mr-3">✓</span> Avatar final listo para usar en todas tus plataformas.
+                        </li>
+                        <li class="flex items-center text-xl font-medium scroll-reveal" style="transition-delay: 200ms;">
+                            <span class="text-2xl text-neon-blue mr-3">✓</span> Carpeta profesional con presets, licencias y guía de uso.
+                        </li>
+                        <li class="flex items-center text-xl font-medium scroll-reveal" style="transition-delay: 300ms;">
+                            <span class="text-2xl text-neon-blue mr-3">✓</span> Landing page publicada, funcional y optimizada para la conversión.
+                        </li>
+                        <li class="flex items-center text-xl font-medium scroll-reveal" style="transition-delay: 400ms;">
+                            <span class="text-2xl text-neon-blue mr-3">✓</span> Leads calificados y las bases para tus primeras ventas automáticas.
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Mockup Dashboard -->
+                <div class="flex justify-center lg:justify-end mt-10 lg:mt-0 scroll-reveal" style="transition-delay: 600ms;">
+                    <img 
+                        src="assets/img/mentoring/dash.jpg" 
+                        alt="Mockup de dashboard con métricas en crecimiento y gráficos tecnológicos." 
+                        class="w-full max-w-lg rounded-xl border border-neon-blue/50 shadow-neon max-w-full h-auto"
+                    >
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Testimonios (Social Proof) -->
+        <section id="testimonios" class="py-20 bg-dark-card/50 border-y border-neon-purple/20">
+            <div class="max-w-6xl mx-auto px-6">
+                <h2 class="text-4xl font-extrabold text-center mb-12 text-neon-purple text-neon-glow scroll-reveal">
+                    La Prueba: Lo Que Dicen Nuestros Alumnos
+                </h2>
+                
+                <!-- Testimonios con hover mejorado y staggered reveal -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Testimonio 1 -->
+                    <div class="bg-dark-card p-6 rounded-xl border border-neon-purple/30 shadow-md card-hover-effect scroll-reveal hover:border-neon-purple" style="transition-delay: 0ms;">
+                        <p class="text-lg italic mb-4 text-text-light">
+                            "En 10 días conseguí mi primer cliente solo con el embudo express. La consistencia del avatar es alucinante, ¡parece que estoy en 3 lugares a la vez!"
+                        </p>
+                        <div class="flex items-center border-t border-neon-blue/20 pt-4">
+                            <img src="https://placehold.co/60x60/A855F7/07070F?text=IA" alt="Avatar de alumno 1" class="w-12 h-12 rounded-full mr-4 border-2 border-neon-blue">
+                            <div>
+                                <p class="font-bold text-neon-blue">Xiomara T.</p>
+                                <p class="text-sm text-text-light/60">E-commerce Manager</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Testimonio 2 -->
+                    <div class="bg-dark-card p-6 rounded-xl border border-neon-purple/30 shadow-md card-hover-effect scroll-reveal hover:border-neon-purple" style="transition-delay: 150ms;">
+                        <p class="text-lg italic mb-4 text-text-light">
+                            "Antes, mi branding era un caos. Ahora, mi avatar es mi mejor vendedor. Todos los módulos de cada semena me ayudaron un montón."
+                        </p>
+                        <div class="flex items-center border-t border-neon-blue/20 pt-4">
+                            <img src="https://placehold.co/60x60/A855F7/07070F?text=IA" alt="Avatar de alumno 2" class="w-12 h-12 rounded-full mr-4 border-2 border-neon-blue">
+                            <div>
+                                <p class="font-bold text-neon-blue">Luis F.</p>
+                                <p class="text-sm text-text-light/60">Consultor Digital</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. NUEVA SECCIÓN: OFERTA ÚNICA Y URGENTE -->
+        <section id="precio-final" class="py-20 bg-dark-card/50 border-y-4 border-neon-purple/70">
+            <div class="max-w-4xl mx-auto px-6 text-center">
+                
+                <h2 class="text-4xl sm:text-5xl font-extrabold mb-4 text-neon-blue text-neon-glow scroll-reveal">
+                    ¡Oferta Relámpago! Desbloquea tu Poder I.A.
+                </h2>
+                
+                <p class="text-xl sm:text-2xl text-text-light/80 mb-10 scroll-reveal" style="transition-delay: 150ms;">
+                    Accede al programa intensivo de 4 semanas, valorado en $997 USD, con la única garantía de crear un activo digital que te genera ingresos 24/7.
+                </p>
+
+                <div class="mb-10 flex flex-col items-center space-y-4 scroll-reveal" style="transition-delay: 300ms;">
+                    <!-- Precio Tachado -->
+                    <p class="text-3xl text-text-light/50 line-through font-extrabold tracking-wider">
+                        Precio Normal: $997 USD
+                    </p>
+                    <!-- Precio Destacado -->
+                    <div class="bg-dark-bg p-6 sm:p-8 rounded-2xl border-4 border-neon-purple/80 shadow-neon-purple/70 shadow-2xl transition duration-500 hover:scale-[1.05]">
+                        <p class="text-2xl font-semibold text-text-light mb-2 uppercase">Tu Inversión Hoy</p>
+                        <p class="text-6xl sm:text-8xl font-black text-neon-purple text-neon-glow">
+                            $197 USD
+                        </p>
+                    </div>
+                </div>
+
+                <p class="text-lg text-red-400 font-bold mb-8 scroll-reveal" style="transition-delay: 450ms;">
+                    ⚠️ ¡Sólo quedan 5 plazas disponibles a este precio promocional!
+                </p>
+                
+                <!-- CTA Único -->
+                <a href="#cta-final" class="inline-block btn-neon px-12 py-5 rounded-xl text-xl uppercase tracking-wider bg-neon-purple shadow-neon-purple/70 animation-none hover:!scale-[1.03] scroll-reveal" style="transition-delay: 600ms;">
+                    🔒 Asegurar mi lugar en 80% OFF
+                </a>
+
+            </div>
+        </section>
+
+        <!-- 8. FAQ (Preguntas Frecuentes) - Con funcionalidad simple JS -->
+        <section id="faq" class="py-20 bg-dark-bg">
+            <div class="max-w-4xl mx-auto px-6">
+                <h2 class="text-4xl font-extrabold text-center mb-12 text-neon-purple text-neon-glow scroll-reveal">
+                    Preguntas Frecuentes (FAQ)
+                </h2>
+
+                <div class="space-y-4">
+                    <!-- Pregunta 1 -->
+                    <div class="bg-dark-card p-5 rounded-xl border border-neon-blue/20 cursor-pointer faq-item transition duration-300 scroll-reveal" style="transition-delay: 0ms;" onclick="toggleFaq(this)">
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-lg font-bold text-text-light">¿Necesito experiencia previa en IA?</h3>
+                            <span class="text-xl text-neon-blue faq-icon">+</span>
+                        </div>
+                        <div class="faq-content mt-3 text-text-light/70 hidden">
+                            <p>Absolutamente no. El programa está diseñado para guiarte desde cero. Cubrimos desde la elección de las herramientas más sencillas hasta la creación de prompts avanzados.</p>
+                        </div>
+                    </div>
+
+                    <!-- Pregunta 2 -->
+                    <div class="bg-dark-card p-5 rounded-xl border border-neon-blue/20 cursor-pointer faq-item transition duration-300 scroll-reveal" style="transition-delay: 150ms;" onclick="toggleFaq(this)">
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-lg font-bold text-text-light">¿Qué pasa si no tengo tiempo todos los días?</h3>
+                            <span class="text-xl text-neon-blue faq-icon">+</span>
+                        </div>
+                        <div class="faq-content mt-3 text-text-light/70 hidden">
+                            <p>El programa es intensivo, pero flexible. Las sesiones en vivo quedan grabadas y el trabajo principal se estructura en 4 bloques semanales. Con 5-8 horas semanales enfocadas, verás un gran avance.</p>
+                        </div>
+                    </div>
+
+                    <!-- Pregunta 3 -->
+                    <div class="bg-dark-card p-5 rounded-xl border border-neon-blue/20 cursor-pointer faq-item transition duration-300 scroll-reveal" style="transition-delay: 300ms;" onclick="toggleFaq(this)">
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-lg font-bold text-text-light">¿Cuándo veo resultados?</h3>
+                            <span class="text-xl text-neon-blue faq-icon">+</span>
+                        </div>
+                        <div class="faq-content mt-3 text-text-light/70 hidden">
+                            <p>Los resultados clave se esperan a partir de la **Semana 4**, con el lanzamiento de la "Máquina 7D". Muchos alumnos reportan leads calificados y primeras ventas durante esa primera semana de lanzamiento.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 9. CTA Final (Cierre de Landing) -->
+        <section id="cta-final" class="py-20 bg-dark-card border-t border-neon-purple/50">
+            <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+                
+                <!-- Imagen Inspiradora de Aileen -->
+                <div class="flex justify-center lg:justify-start scroll-reveal">
+                    <img 
+                        src="assets/img/mentoring/retrato.jpg" 
+                        alt="Retrato inspirador de Aileen, mirando hacia el futuro." 
+                        class="w-64 h-64 sm:w-80 sm:h-80 object-cover rounded-2xl border-2 border-neon-purple shadow-lg shadow-neon-purple/40 transition duration-500 hover:shadow-neon-blue/40 hover:border-neon-blue max-w-full h-auto"
+                        onerror="this.onerror=null;this.src='assets/img/mentoring/retrato.jpg';"
+                    >
+                </div>
+
+                <!-- Texto y Botón CTA -->
+                <div class="text-center lg:text-left scroll-reveal" style="transition-delay: 200ms;">
+                    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold mb-6 leading-tight text-neon-purple text-neon-glow">
+                        Es el momento de crear tu identidad digital y empezar a monetizar con IA.
+                    </h2>
+                    <p class="text-xl text-text-light/90 mb-8">
+                        Aprovecha el precio exclusivo de hoy y no dejes pasar la oportunidad de transformar tu negocio.
+                    </p>
+                    <a href="#precio-final" class="inline-block btn-neon px-12 py-5 rounded-xl text-xl uppercase tracking-wider bg-neon-purple shadow-neon-purple/70 animation-none hover:!scale-[1.03]">
+                        👉 Quiero asegurar mi plaza
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark-card/50 py-8 border-t border-neon-blue/10">
+        <div class="max-w-6xl mx-auto px-6 text-center text-sm text-text-light/50">
+            <p>&copy; 2025 Aileen Mentoring. Todos los derechos reservados. | <a href="#" class="hover:text-neon-blue">Aviso Legal</a></p>
+        </div>
+    </footer>
+
+    <!-- Script para la funcionalidad y Scroll Reveal -->
+    <script>
+        /**
+         * Función para alternar la visibilidad de la respuesta FAQ
+         * y cambiar el icono.
+         */
+        function toggleFaq(element) {
+            const content = element.querySelector('.faq-content');
+            const icon = element.querySelector('.faq-icon');
+
+            if (content.classList.contains('hidden')) {
+                // Abre
+                content.classList.remove('hidden');
+                icon.textContent = '–'; // Cambia a guión para cerrado
+                element.classList.add('border-neon-blue');
+                element.classList.remove('border-neon-blue/20');
+            } else {
+                // Cierra
+                content.classList.add('hidden');
+                icon.textContent = '+';
+                element.classList.remove('border-neon-blue');
+                element.classList.add('border-neon-blue/20');
+            }
+        }
+
+        // Script para desplazamiento suave a las secciones
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // ----------------------------------------------------
+        // Lógica de Scroll Reveal usando IntersectionObserver
+        // ----------------------------------------------------
+        document.addEventListener("DOMContentLoaded", () => {
+            // Selecciona todos los elementos marcados para la animación
+            const revealElements = document.querySelectorAll('.scroll-reveal');
+
+            const observerOptions = {
+                root: null, // El viewport es el root
+                rootMargin: '0px',
+                // El elemento se revela cuando el 10% está visible.
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Si el elemento está en el viewport, añade la clase 'visible'
+                        entry.target.classList.add('visible');
+                        // Dejar de observar el elemento una vez que se ha animado
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            // Empieza a observar cada elemento
+            revealElements.forEach(element => {
+                observer.observe(element);
+            });
+        });
+    </script>
+
+</body>
+</html>
